@@ -285,7 +285,7 @@ impl<'a, 'm> ToArgs for Window<'m> {
     fn to_args(&self) -> Vec<String> {
         let mut args = Vec::new();
         args.extend(self.format.to_args());
-        args.extend(self.dimensions.to_args());
+        //args.extend(self.dimensions.to_args());
         if self.fullscreen {
             args.extend(vec!["-fullscreen".to_string()]);
         } else {
