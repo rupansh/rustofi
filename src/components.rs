@@ -159,7 +159,6 @@ impl<'a, T: Display + Clone> ItemList<'a, T> {
         let response = self
             .window
             .clone()
-            .lines(display_options.len() as i32)
             .prompt(prompt)
             .show(display_options.clone());
         match response {
