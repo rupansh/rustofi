@@ -273,9 +273,10 @@ impl<'a> EntryBox {
 
     /// run the constructed rofi window and return the user input as a string wrapped in a
     /// `RustofiResult::Selection`
-    pub fn display(prompt: String) -> RustofiResult {
+    pub fn display(prog_args: Vec<String>, prompt: String) -> RustofiResult {
         let result = EntryBox::create_window()
             .prompt(prompt)
+            .add_args(prog_args)
             .show(vec!["".to_string()]);
         match result {
             Ok(input) => {
