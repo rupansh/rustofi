@@ -126,20 +126,21 @@ pub struct ItemList<'a, T> {
 
 impl<'a, T: Display + Clone> ItemList<'a, T> {
     /// create a new ItemList with the given items and callback
-    pub fn new(items: Vec<T>, item_callback: Box<dyn RustofiCallback<T>>) -> Self {
+    pub fn new(prog_args: Vec<String>, items: Vec<T>, item_callback: Box<dyn RustofiCallback<T>>) -> Self {
         ItemList {
             items,
             item_callback,
-            window: ItemList::<T>::create_window()
+            window: ItemList::<T>::create_window(prog_args)
         }
     }
 
     /// create a simple rofi instance representing a window in the middle of the screen
-    fn create_window() -> Window<'a> {
+    fn create_window(prog_args: Vec<String>) -> Window<'a> {
         Window::new("ItemList")
             .format('s')
             .location(Location::MiddleCentre)
             .add_args(vec!["-markup-rows".to_string()])
+            .add_args(prog_args)
     }
 
     /// set a completely custom window
