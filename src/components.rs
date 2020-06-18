@@ -126,7 +126,7 @@ pub struct ItemList<'a, T> {
 
 impl<'a, T: Display + Clone> ItemList<'a, T> {
     /// create a new ItemList with the given items and callback
-    pub fn new(prog_args: Vec<String>, items: Vec<T>, item_callback: Box<dyn RustofiCallback<T>>) -> Self {
+    pub fn new(prog_args: &Vec<String>, items: Vec<T>, item_callback: Box<dyn RustofiCallback<T>>) -> Self {
         ItemList {
             items,
             item_callback,
@@ -135,12 +135,12 @@ impl<'a, T: Display + Clone> ItemList<'a, T> {
     }
 
     /// create a simple rofi instance representing a window in the middle of the screen
-    fn create_window(prog_args: Vec<String>) -> Window<'a> {
+    fn create_window(prog_args: &Vec<String>) -> Window<'a> {
         Window::new("ItemList")
             .format('s')
             .location(Location::MiddleCentre)
             .add_args(vec!["-markup-rows".to_string()])
-            .add_args(prog_args)
+            .add_args(prog_args.to_vec())
     }
 
     /// set a completely custom window
@@ -273,10 +273,10 @@ impl<'a> EntryBox {
 
     /// run the constructed rofi window and return the user input as a string wrapped in a
     /// `RustofiResult::Selection`
-    pub fn display(prog_args: Vec<String>, prompt: String) -> RustofiResult {
+    pub fn display(prog_args: &Vec<String>, prompt: String) -> RustofiResult {
         let result = EntryBox::create_window()
             .prompt(prompt)
-            .add_args(prog_args)
+            .add_args(prog_args.to_vec())
             .show(vec!["".to_string()]);
         match result {
             Ok(input) => {
