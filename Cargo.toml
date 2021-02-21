@@ -1,7 +1,7 @@
 [package]
 name = "rustofi"
 authors = ["Kristopher Ruzic <krruzic@gmail.com>"]
-version = "0.3.0"
+version = "0.3.1"
 edition = "2018"
 license = "GPL-3.0+"
 description = "Library to build simple 'Rofi User Interface' applications"
